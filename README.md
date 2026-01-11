@@ -240,7 +240,7 @@ cards:
         name: Energy Delivered
       - entity: sensor.ev_session_duration
         name: Duration
-      - entity: sensor.ev_session_distance
+      - entity: sensor.ev_session_distance_mi
         name: Estimated Range
       - entity: sensor.ev_connected_vehicle
         name: Vehicle
