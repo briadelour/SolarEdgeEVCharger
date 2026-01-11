@@ -7,7 +7,7 @@ Monitor and track your SolarEdge EV Charger directly in Home Assistant using the
 
 ## 📸 Screenshots
 
-*Add screenshots of your dashboard here*
+<img width="505" height="741" alt="image" src="https://github.com/user-attachments/assets/4b36c4ff-152b-4e96-8fe0-d4871d0cd51e" />
 
 ## ✨ Features
 
