@@ -108,6 +108,32 @@
         {% endif %}
       icon: mdi:connection
 
+  # Session Distance (km)
+  - name: "EV Session Distance km"
+    unique_id: ev_session_distance_km
+    state: >
+      {% set raw = state_attr('sensor.solaredge_ev_charger_raw', 'devicesByType') %}
+      {% if raw and raw.EV_CHARGER is defined and raw.EV_CHARGER|length > 0 %}
+        {{ raw.EV_CHARGER[0].sessionDistance | float(0) | round(1) }}
+      {% else %}
+        0
+      {% endif %}
+    unit_of_measurement: "km"
+    icon: mdi:map-marker-distance
+
+# Session Distance (miles)
+  - name: "EV Session Distance mi"
+    unique_id: ev_session_distance_mi
+    state: >
+      {% set raw = state_attr('sensor.solaredge_ev_charger_raw', 'devicesByType') %}
+      {% if raw and raw.EV_CHARGER is defined and raw.EV_CHARGER|length > 0 %}
+        {{ (raw.EV_CHARGER[0].sessionDistance | float(0) * 0.621371) | round(1) }}
+      {% else %}
+        0
+      {% endif %}
+    unit_of_measurement: "mi"
+    icon: mdi:map-marker-distance
+
 - binary_sensor:
     # Is a vehicle currently connected?
     - name: "EV Charger Connected"
