@@ -1,0 +1,21 @@
+# SolarEdge EV Charger - Command Line Sensor
+# This file should be included in configuration.yaml with:
+# command_line: !include command_line.yaml
+
+- sensor:
+    name: solaredge_ev_charger_raw
+    command: "/config/shell/solaredge_login.sh"
+    scan_interval: 30
+    command_timeout: 30
+    value_template: >
+      {% if value_json is defined and value_json.devicesByType is defined %}
+        {% if value_json.devicesByType.EV_CHARGER is defined and value_json.devicesByType.EV_CHARGER|length > 0 %}
+          {{ value_json.devicesByType.EV_CHARGER[0].chargerStatus }}
+        {% else %}
+          No Charger
+        {% endif %}
+      {% else %}
+        No Data
+      {% endif %}
+    json_attributes:
+      - devicesByType

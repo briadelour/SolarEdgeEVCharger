@@ -1,0 +1,136 @@
+# SolarEdge EV Charger - Template Sensors
+# These sensors format the raw data for display in Home Assistant
+
+- sensor:
+    # Charger Status (Formatted for display)
+    - name: "EV Charger Status"
+      unique_id: ev_charger_status
+      state: >
+        {% set status = state_attr('sensor.solaredge_ev_charger_raw', 'chargerStatus') %}
+        {% if status == 'CHARGING' %}
+          Charging
+        {% elif status == 'PLUGGED_IN' %}
+          Plugged In
+        {% elif status == 'NOT_CONNECTED' %}
+          Not Connected
+        {% else %}
+          {{ status | default('Unknown') }}
+        {% endif %}
+      icon: >
+        {% set status = state_attr('sensor.solaredge_ev_charger_raw', 'chargerStatus') %}
+        {% if status == 'CHARGING' %}
+          mdi:ev-station
+        {% elif status == 'PLUGGED_IN' %}
+          mdi:ev-plug-type2
+        {% else %}
+          mdi:power-plug-off
+        {% endif %}
+    
+    # Current Charging Power (in kW)
+    - name: "EV Charger Power"
+      unique_id: ev_charger_power
+      state: >
+        {% set subtitles = state_attr('sensor.solaredge_ev_charger_raw', 'chargerStatusSubTitle') %}
+        {% if subtitles and subtitles|length > 0 %}
+          {{ (subtitles[0].numericValue | float(0) / 1000) | round(2) }}
+        {% else %}
+          0
+        {% endif %}
+      unit_of_measurement: "kW"
+      device_class: power
+      state_class: measurement
+      icon: mdi:lightning-bolt
+    
+    # Session Energy (in kWh)
+    - name: "EV Session Energy"
+      unique_id: ev_session_energy
+      state: >
+        {{ (state_attr('sensor.solaredge_ev_charger_raw', 'sessionEnergy') | float(0) / 1000) | round(2) }}
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      icon: mdi:battery-charging
+    
+    # Session Duration (formatted as H:MM)
+    - name: "EV Session Duration"
+      unique_id: ev_session_duration
+      state: >
+        {% set minutes = state_attr('sensor.solaredge_ev_charger_raw', 'sessionDuration') | int(0) %}
+        {% set hours = (minutes / 60) | int %}
+        {% set mins = minutes % 60 %}
+        {{ '%d:%02d' % (hours, mins) }}
+      icon: mdi:clock-outline
+    
+    # Connected Vehicle Name
+    - name: "EV Connected Vehicle"
+      unique_id: ev_connected_vehicle
+      state: >
+        {% set appliance = state_attr('sensor.solaredge_ev_charger_raw', 'applianceData') %}
+        {% if appliance %}
+          {{ appliance.alias | default('Unknown Vehicle') }}
+        {% else %}
+          No vehicle
+        {% endif %}
+      icon: mdi:car-electric
+    
+    # Charger Mode (Manual or Auto)
+    - name: "EV Charger Mode"
+      unique_id: ev_charger_mode
+      state: >
+        {% set mode = state_attr('sensor.solaredge_ev_charger_raw', 'activationMode') %}
+        {% if mode == 'MANUAL' %}
+          Manual
+        {% elif mode == 'AUTO' %}
+          Auto
+        {% else %}
+          {{ mode | default('Unknown') }}
+        {% endif %}
+      icon: >
+        {% set mode = state_attr('sensor.solaredge_ev_charger_raw', 'activationMode') %}
+        {% if mode == 'MANUAL' %}
+          mdi:hand-back-right
+        {% else %}
+          mdi:auto-mode
+        {% endif %}
+    
+    # Connection Status (Detailed)
+    - name: "EV Connection Status"
+      unique_id: ev_connection_status
+      state: >
+        {% set status = state_attr('sensor.solaredge_ev_charger_raw', 'connectionStatus') %}
+        {% set sub_status = state_attr('sensor.solaredge_ev_charger_raw', 'connectionSubStatus') %}
+        {% if sub_status %}
+          {{ sub_status | replace('_', ' ') | title }}
+        {% elif status %}
+          {{ status | replace('_', ' ') | title }}
+        {% else %}
+          Unknown
+        {% endif %}
+      icon: mdi:connection
+
+- binary_sensor:
+    # Is a vehicle currently connected?
+    - name: "EV Charger Connected"
+      unique_id: ev_charger_connected
+      state: >
+        {{ state_attr('sensor.solaredge_ev_charger_raw', 'sessionActive') | default(false) }}
+      device_class: plug
+    
+    # Is charging currently active?
+    - name: "EV Charger Charging"
+      unique_id: ev_charger_charging
+      state: >
+        {{ state_attr('sensor.solaredge_ev_charger_raw', 'chargerStatus') == 'CHARGING' }}
+      device_class: battery_charging
+    
+    # Is a charging schedule enabled?
+    - name: "EV Charge Schedule Enabled"
+      unique_id: ev_charge_schedule_enabled
+      state: >
+        {% set triggers = state_attr('sensor.solaredge_ev_charger_raw', 'deviceTriggers') %}
+        {% if triggers and triggers|length > 0 %}
+          {{ triggers[0].enable | default(false) }}
+        {% else %}
+          false
+        {% endif %}
+      icon: mdi:calendar-clock
