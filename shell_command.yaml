@@ -1,0 +1,6 @@
+# =============================================================================
+# SolarEdge EV Charger Shell Commands
+# =============================================================================
+
+ev_charger_start: "/config/shell/solaredge_start_charging.sh"
+ev_charger_stop: "/config/shell/solaredge_stop_charging.sh"
