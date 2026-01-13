@@ -47,6 +47,7 @@ All sensors include proper device classes and state classes for:
 - **Terminal & SSH Add-on** installed (for HAOS)
 
 ## 🚀 Installation
+**NOTE:** Steps 1-4 may not be needed as the private API was added to this library used by Home Assistant: https://github.com/Solarlibs/solaredge-web/releases/tag/v0.1.0 which means the EV Charger will soon be visible in the native integration https://www.home-assistant.io/integrations/solaredge
 
 ### Step 1: Get Your SolarEdge Cookie
 
