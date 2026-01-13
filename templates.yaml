@@ -35,7 +35,6 @@ sensor:
   - name: "EV Charger Power"
     unique_id: ev_charger_power
     unit_of_measurement: "kW"
-    device_class: power
     state_class: measurement
     state: >
       {% set charger = state_attr('sensor.solaredge_ev_charger_raw', 'devicesByType')['EV_CHARGER'][0] %}
@@ -283,3 +282,20 @@ binary_sensor:
     state: >
       {% set charger = state_attr('sensor.solaredge_ev_charger_raw', 'devicesByType')['EV_CHARGER'][0] %}
       {{ charger.excessPV == -1 }}
+
+# =============================================================================
+# BUTTON ENTITIES - Start/Stop Charging
+# =============================================================================
+
+button:
+  - name: "EV Charger Start Charging"
+    unique_id: ev_charger_start_charging
+    icon: mdi:play-circle
+    press:
+      - service: shell_command.ev_charger_start
+
+  - name: "EV Charger Stop Charging"
+    unique_id: ev_charger_stop_charging
+    icon: mdi:stop-circle
+    press:
+      - service: shell_command.ev_charger_stop
