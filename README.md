@@ -1,6 +1,6 @@
 # SolarEdge EV Charger Integration for Home Assistant
 
-Monitor and **control** your SolarEdge EV Charger directly in Home Assistant using the private SolarEdge API.
+Manual notes to monitor and **control** your SolarEdge EV Charger directly in Home Assistant using the private SolarEdge API.
 
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-Compatible-blue.svg)](https://www.home-assistant.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
