@@ -4,6 +4,8 @@ Manual notes to monitor and **control** your SolarEdge EV Charger directly in Ho
 
 If you prefer, I have a HACS plugin available from this custom repository: https://github.com/briadelour/solaredge-evcharger-ha
 
+**NOTE:** This is temporary while working to get this into the more complete HA integration here: https://github.com/Solarlibs/solaredge-web
+
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-Compatible-blue.svg)](https://www.home-assistant.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
