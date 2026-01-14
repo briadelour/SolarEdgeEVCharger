@@ -1,4 +1,4 @@
-# SolarEdge EV Charger Integration for Home Assistant
+# SolarEdge EV Charger Integration for Home Assistant (US)
 
 Manual notes to monitor and **control** your SolarEdge EV Charger directly in Home Assistant using shell scripts for the private SolarEdge API.
 
