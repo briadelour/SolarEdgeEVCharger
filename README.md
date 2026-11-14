@@ -1,13 +1,11 @@
 # SolarEdge EV Charger Integration for Home Assistant (US)
-[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-donate-yellow?logo=buymeacoffee&logoColor=white)](https://buymeacoffee.com/briadelour)
-[![PayPal](https://img.shields.io/badge/PayPal-donate-blue?logo=paypal&logoColor=white)](https://www.paypal.com/paypalme/bdeloureiro)
-
 Manual notes to monitor and **control** your SolarEdge EV Charger directly in Home Assistant using shell scripts for the private SolarEdge API.
 
 If you prefer, I have a HACS plugin available from this custom repository: https://github.com/briadelour/solaredge-evcharger-ha
 
 **NOTE:** This is temporary while working to get this into the more complete HA integration here: https://github.com/Solarlibs/solaredge-web
-
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-donate-yellow?logo=buymeacoffee&logoColor=white)](https://buymeacoffee.com/briadelour)
+[![PayPal](https://img.shields.io/badge/PayPal-donate-blue?logo=paypal&logoColor=white)](https://www.paypal.com/paypalme/bdeloureiro)
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-Compatible-blue.svg)](https://www.home-assistant.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
